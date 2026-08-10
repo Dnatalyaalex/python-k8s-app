@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Panel</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Consolas', 'SF Mono', 'Courier New', monospace;
+    background: radial-gradient(circle at 20% 20%, #1a2332 0%, #0d1420 60%, #060a10 100%);
+    color: #d6e4f0;
+    padding: 20px;
+  }
+
+  .panel {
+    width: 100%;
+    max-width: 460px;
+    background: rgba(18, 28, 42, 0.85);
+    border: 1px solid rgba(0, 200, 255, 0.25);
+    border-radius: 16px;
+    padding: 36px 32px;
+    box-shadow: 0 0 0 1px rgba(0,200,255,0.05), 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(0,150,255,0.08);
+    backdrop-filter: blur(6px);
+  }
+
+  .panel-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #3fe0a5;
+    box-shadow: 0 0 8px #3fe0a5;
+    animation: pulse 2s infinite ease-in-out;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .panel-header span {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #6fd8ff;
+  }
+
+  h1 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #eaf6ff;
+    margin: 4px 0 28px 0;
+    letter-spacing: 0.3px;
+  }
+
+  .field { margin-bottom: 16px; }
+  label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #7fa8c9;
+    margin-bottom: 7px;
+  }
+  input[type="text"] {
+    width: 100%;
+    padding: 12px 14px;
+    background: #0c1420;
+    border: 1px solid #22384f;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    color: #eaf6ff;
+    outline: none;
+    transition: border-color 0.25s, box-shadow 0.25s;
+  }
+  input[type="text"]::placeholder { color: #4a6178; }
+  input[type="text"]:focus {
+    border-color: #35c8f5;
+    box-shadow: 0 0 0 3px rgba(53,200,245,0.15);
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 28px;
+  }
+  button {
+    font-family: inherit;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.2s, background 0.2s;
+    padding: 12px 36px;
+  }
+  button:active { transform: scale(0.96); }
+
+  #submitBtn {
+    background: linear-gradient(135deg, #1ec8e8, #2f7de0);
+    color: #04141f;
+  }
+  #submitBtn:hover { box-shadow: 0 0 18px rgba(30,200,232,0.5); }
+
+  #showBtn {
+    background: transparent;
+    color: #8fd4ee;
+    border: 1px solid #2c4f66;
+    padding: 10px 32px;
+  }
+  #showBtn:hover {
+    border-color: #35c8f5;
+    box-shadow: 0 0 14px rgba(53,200,245,0.25);
+  }
+
+  #resetBtn {
+    background: transparent;
+    color: #e88a8a;
+    border: 1px solid #4a2828;
+    padding: 10px 32px;
+  }
+  #resetBtn:hover {
+    border-color: #f05a5a;
+    box-shadow: 0 0 14px rgba(240,90,90,0.25);
+  }
+
+  .result {
+    margin-top: 26px;
+    padding: 16px 18px;
+    border-radius: 10px;
+    background: #0a121c;
+    border: 1px solid #1c2f42;
+    font-size: 13.5px;
+    color: #9fd8f5;
+    line-height: 1.7;
+    min-height: 20px;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.35s, transform 0.35s;
+  }
+  .result.visible { opacity: 1; transform: translateY(0); }
+  .result .entry {
+    color: #eaf6ff;
+    padding-left: 14px;
+    position: relative;
+  }
+  .result .entry::before {
+    content: "›";
+    position: absolute;
+    left: 0;
+    color: #35c8f5;
+  }
+</style>
+</head>
+<body>
+
+<div class="panel">
+  <div class="panel-header">
+    <div class="dot"></div>
+    <span>live · connected</span>
+  </div>
+  <h1>Data Entry Panel</h1>
+
+  <div class="field">
+    <label for="firstName">First Name</label>
+    <input type="text" id="firstName" placeholder="Enter value...">
+  </div>
+
+  <div class="field">
+    <label for="lastName">Last Name</label>
+    <input type="text" id="lastName" placeholder="Enter value...">
+  </div>
+
+  <div class="actions">
+    <button id="submitBtn">Submit</button>
+    <button id="showBtn">Show All Names</button>
+    <button id="resetBtn">Reset Data</button>
+  </div>
+
+  <div id="result" class="result"></div>
+</div>
+
+<script>
+  const firstNameInput = document.getElementById('firstName');
+  const lastNameInput = document.getElementById('lastName');
+  const submitBtn = document.getElementById('submitBtn');
+  const showBtn = document.getElementById('showBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const result = document.getElementById('result');
+
+  submitBtn.addEventListener('click', async () => {
+    const first = firstNameInput.value.trim();
+    const last = lastNameInput.value.trim();
+
+    if (!first && !last) {
+      result.innerHTML = "⚠ please fill in at least one field";
+      result.classList.add('visible');
+      return;
+    }
+
+    const response = await fetch('/api/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ first_name: first, last_name: last })
+    });
+    const data = await response.json();
+
+    firstNameInput.value = '';
+    lastNameInput.value = '';
+
+    result.innerHTML = data.ok ? "✔ saved to server" : "⚠ error saving data";
+    result.classList.add('visible');
+  });
+
+  showBtn.addEventListener('click', async () => {
+    const response = await fetch('/api/get');
+    const data = await response.json();
+
+    if (!data.names || data.names.length === 0) {
+      result.innerHTML = "no data";
+    } else {
+      const list = data.names
+        .map(n => `<div class="entry">${n.first_name} ${n.last_name}</div>`)
+        .join('');
+      result.innerHTML = list;
+    }
+    result.classList.add('visible');
+  });
+
+  resetBtn.addEventListener('click', async () => {
+    const response = await fetch('/api/reset', { method: 'POST' });
+    const data = await response.json();
+
+    result.innerHTML = data.ok ? "✔ all data cleared" : "⚠ error clearing data";
+    result.classList.add('visible');
+  });
+</script>
+
+</body>
+</html>
