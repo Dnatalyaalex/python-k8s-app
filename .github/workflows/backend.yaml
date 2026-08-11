@@ -1,4 +1,4 @@
-name: Backend image_build
+name: Backend Image Build
 on:
   push:
     tags: 
@@ -10,10 +10,10 @@ permissions:
 
 jobs:
   build:
-    name: image-build
+    name: image build
     runs-on: ubuntu-latest
     steps:
-      - name: Get version
+      - name: get version
         id: version
         run: echo "version=${GITHUB_REF_NAME#backend-v}" >> "$GITHUB_OUTPUT"
       - name: login
