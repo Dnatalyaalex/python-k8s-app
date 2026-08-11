@@ -1,4 +1,4 @@
-name: image_build
+name: Backend image_build
 on:
   push:
     tags: 
