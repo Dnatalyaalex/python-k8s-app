@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     service: redis 
-  type: ClasterIP
+  type: ClusterIP
   ports:
     - protocol: TCP 
       port: 6379
