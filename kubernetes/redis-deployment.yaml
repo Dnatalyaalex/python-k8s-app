@@ -18,5 +18,5 @@ spec:
         - name: redis 
           image: ghcr.io/dnatalyaalex/python-k8s-app-redis:1.4
           ports: 
-            - ContainerPort: 6379
+          - containerPort: 6379
 
