@@ -1,0 +1,22 @@
+apiVersion: apps/v1 
+kind: Deployment 
+metadata: 
+  name: backend 
+  labels: 
+    service: backend 
+spec:
+  replicas: 2
+  selector:
+    matchlabels:
+      service: backend 
+  template:
+    metadata:
+      labels: 
+        service: backend 
+    spec:
+      containers: 
+        name: backend 
+        ports:
+          - 5001
+        image: ghcr.io/dnatalyaalex/python-k8s-app-backend:latest
+
