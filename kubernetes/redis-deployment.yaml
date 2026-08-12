@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deployment 
+  labels: 
+    service: redis 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: redis
+  template:
+    metadata:
+      labels:
+        service: redis
+    spec:
+      containers:
+        - name: redis 
+          image: ghcr.io/dnatalyaalex/python-k8s-app-redis:1.4
+          ports: 
+            - ContainerPort: 6379
+
