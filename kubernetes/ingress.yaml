@@ -5,7 +5,7 @@ metadata:
 spec:
   ingressClassName: nginx 
   rules:
-    - host: namelist-app
+    - host: names-app
       http:
         paths:
         - path: /
