@@ -19,4 +19,5 @@ spec:
           image: ghcr.io/dnatalyaalex/python-k8s-app-redis:1.4
           ports: 
           - containerPort: 6379
+          
 
