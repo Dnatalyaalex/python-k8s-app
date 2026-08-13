@@ -19,4 +19,11 @@ spec:
         ports:
         - containerPort: 5001
         image: ghcr.io/dnatalyaalex/python-k8s-app-backend:1.0
+        volumeMounts:
+            - name: data
+              mountPath: /app/data
+      volumes:
+        - name: data 
+          persistentVolumeClaim:
+            claimName: names-app-volume-pvc
 
