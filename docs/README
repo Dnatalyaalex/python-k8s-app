@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="docs/architecture.png" alt="Architecture" width="1200">
-</p>
-
 Kubernetes Networking & Storage Demo
 
 A small multi-service app built purely as a learning exercise — the goal isn't the app's functionality, but demonstrating how containers in separate pods communicate, how Ingress routes and balances traffic, and how a persistent volume keeps data alive across pod restarts.
