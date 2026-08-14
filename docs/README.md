@@ -34,24 +34,24 @@ minikube addons enable ingress
 kubectl apply -f k8s/
 
 **check everything is up** <br>
-kubectl get pods 
-kubectl get svc
-kubectl get ingress
+kubectl get pods <br>
+kubectl get svc <br>
+kubectl get ingress <br>
 
-**expose the Ingress controller**
+**expose the Ingress controller** <br>
 minikube tunnel
 
 **Add both hosts to your hosts file (/etc/hosts on Linux/Mac, C:\Windows\System32\drivers\etc\hosts on Windows):**
 
-127.0.0.1   names-app
-127.0.0.1   nginx
+127.0.0.1   names-app <br>
+127.0.0.1   nginx <br>
 
 Open in the browser:
 
-http://names-app — the app (submit / show / reset names)
-http://nginx — the NGINX demo page
+http://names-app — the app (submit / show / reset names) <br>
+http://nginx — the NGINX demo page 
+ 
 
-
-### **Next steps**
-Terraform configuration to deploy this to AWS (EKS) — see aws/ branch or folder
+### **Next steps** <br>
+Terraform configuration to deploy this to AWS (EKS) — see aws/ branch or folder <br>
 CI/CD pipeline for automated deployment
