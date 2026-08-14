@@ -1,7 +1,7 @@
 ## **Kubernetes Networking & Storage Demo**
 
-### A small multi-service app built purely as a learning exercise — the goal isn't the app's functionality, but demonstrating how containers in separate pods communicate, 
-### how Ingress routes and balances traffic, and how a persistent volume keeps data alive across pod restarts.
+A small multi-service app built purely as a learning exercise — the goal isn't the app's functionality, but demonstrating how containers in separate pods communicate, 
+how Ingress routes and balances traffic, and how a persistent volume keeps data alive across pod restarts.
 
 ### **What it does**
 Python app + HTML page — the main service. Lets you submit a name, list all saved names, and reset the list, backed by Redis (Submit, Show All Names, Reset Data buttons). A PersistentVolume is attached to this deployment, so data survives pod restarts.
