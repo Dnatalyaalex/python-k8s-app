@@ -22,15 +22,15 @@ NGINX (static demo page)
 Ingress (nginx controller) — host-based routing
 PersistentVolumeClaim — persistent storage for the Python app
 
-**Running locally (minikube)**
+**Running locally (minikube)** <br>
 bash
-**start the cluster**
+**start the cluster** <br>
 minikube start
 
-**enable the Ingress addon**
+**enable the Ingress addon** <br>
 minikube addons enable ingress
 
-**apply all manifests**
+**apply all manifests** <br>
 kubectl apply -f k8s/
 
 **check everything is up** <br>
@@ -39,6 +39,7 @@ kubectl get svc <br>
 kubectl get ingress <br>
 
 **expose the Ingress controller** <br>
+
 minikube tunnel
 
 **Add both hosts to your hosts file (/etc/hosts on Linux/Mac, C:\Windows\System32\drivers\etc\hosts on Windows):**
