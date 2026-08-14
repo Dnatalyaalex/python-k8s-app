@@ -33,7 +33,7 @@ minikube addons enable ingress
 **apply all manifests**
 kubectl apply -f k8s/
 
-**check everything is up**
+**check everything is up** \n
 kubectl get pods
 kubectl get svc
 kubectl get ingress
