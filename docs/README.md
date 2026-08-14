@@ -24,7 +24,7 @@ Ingress (nginx controller) — host-based routing <br>
 PersistentVolumeClaim — persistent storage for the Python app <br>
 
 **Running locally (minikube)** <br>
-`bash` <br>
+bash <br>
 **start the cluster** <br>
 `minikube start` <br>
 
@@ -41,7 +41,7 @@ PersistentVolumeClaim — persistent storage for the Python app <br>
 
 **expose the Ingress controller** <br>
 
-minikube tunnel
+`minikube tunnel`
 
 **Add both hosts to your hosts file (/etc/hosts on Linux/Mac, C:\Windows\System32\drivers\etc\hosts on Windows):**
 
