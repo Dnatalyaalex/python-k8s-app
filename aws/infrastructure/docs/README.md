@@ -25,21 +25,22 @@ Each layer reads the outputs of the previous one via `terraform_remote_state`, s
 - Managed node group (EC2 worker nodes)
 - IAM role for the node group (`AmazonEKSWorkerNodePolicy`, `AmazonEC2ContainerRegistryReadOnly`, `AmazonEKS_CNI_Policy`)
 - IAM OIDC provider for the cluster, used for IRSA
-- EKS access entries (cluster access is managed via the EKS Access Entry API, not the legacy `aws-auth` ConfigMap)
+- CNI (`aws-node`) permissions are also being moved off the node role and onto their own identity, comparing IRSA against the newer **EKS Pod Identity** mechanism for the same purpose
+
+
 
 **layer-3-platform**
 - AWS Load Balancer Controller, installed via the `helm_release` resource
+- EKS access entries (cluster access is managed via the EKS Access Entry API.
 - Dedicated `ServiceAccount` for the controller, bound to an IAM role via IRSA (OIDC-based), scoped only to `kube-system:aws-load-balancer-controller`
-- CNI (`aws-node`) permissions are also being moved off the node role and onto their own identity, comparing IRSA against the newer **EKS Pod Identity** mechanism for the same purpose
 
 ## State backend
 
-State is stored in S3, one object key per layer, with S3's native locking (`use_lockfile = true`) instead of a separate DynamoDB table — this replaced the DynamoDB-based locking approach after it was deprecated in newer Terraform versions.
+State is stored in S3, one object key per layer, with S3's native locking (`use_lockfile = true`)
 
 ## Design decisions
 
 - **No NAT Gateway.** Worker nodes sit in public subnets instead. This is a deliberate cost trade-off for a personal project — the standard production pattern is private subnets + NAT, and that's a known next step, not an oversight.
-- **No custom modules.** With a single cluster and a single environment, wrapping resources in modules would add abstraction without a second use case to justify it. Modules would make sense with multiple environments (dev/staging/prod).
 - **Three separate states, not one.** Splitting by lifecycle (network and cluster change rarely, platform components change more often) and to eliminate the provider chicken-and-egg problem, rather than for team/access-boundary reasons (this is a single-person project).
 
 ## Running
@@ -64,7 +65,6 @@ If any Kubernetes `Ingress` or `Service` of type `LoadBalancer` has been applied
 - Push application images to ECR and update the app's manifests accordingly
 - Add an `Ingress` resource with AWS Load Balancer Controller annotations to expose the app externally
 - Deploy the existing Kubernetes manifests (from the [root README](../README.md)) to this cluster
-- Add resource `requests`/`limits` to the manifests (not needed on minikube, required here)
+- Add resource `requests`/`limits` to the manifests 
 - Set up a CI/CD pipeline (build → push to ECR → apply manifests)
 - Move worker nodes to private subnets + NAT Gateway
-- Finish moving CNI permissions off the node role and onto EKS Pod Identity
