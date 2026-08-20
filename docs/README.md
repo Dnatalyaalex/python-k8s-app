@@ -19,7 +19,6 @@ Host	Routes to: <br>
 names-app	- Python app (UI + Redis-backed logic) <br>
 nginx	- NGINX static page <br>
 <br>
-<br>
 ## Stack  <br>
 Kubernetes (tested on minikube) <br>
 Python (app logic + HTML UI) <br>
@@ -27,7 +26,6 @@ Redis (data store) <br>
 NGINX (static demo page) <br>
 Ingress (nginx controller) — host-based routing <br>
 PersistentVolumeClaim — persistent storage for the Python app <br>
-<br>
 <br>
 ### Running locally (minikube) <br>
 bash <br>
