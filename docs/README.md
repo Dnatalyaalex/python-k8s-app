@@ -55,6 +55,23 @@ Open in the browser:
 
 http://names-app — the app (submit / show / reset names) <br>
 http://nginx — the NGINX demo page 
+
+## CI/CD
+
+GitHub Actions workflows in `.github/workflows/` build and publish Docker images to GitHub Container Registry (ghcr.io) whenever a matching version tag is pushed:
+
+| Workflow | Trigger tag | Image |
+|---|---|---|
+| Backend Image Build | `backend-v*` | `ghcr.io/dnatalyaalex/python-k8s-app-backend` |
+| Redis Image Build | `redis-v*` | `ghcr.io/dnatalyaalex/python-k8s-app-redis` |
+
+The version number is extracted from the tag itself (e.g. `backend-v1.2.0` → image tag `1.2.0`). NGINX doesn't have a workflow — it uses the stock `nginx:latest` image from Docker Hub, with its config supplied entirely via a ConfigMap, so there's no custom image to build.
+
+To release a new backend or Redis image:
+```
+git tag backend-v1.2.0
+git push origin backend-v1.2.0
+```
  
 
 ### Next steps <br>
