@@ -3,7 +3,10 @@
 A small multi-service app built purely as a learning exercise — the goal isn't the app's functionality, but demonstrating how containers in separate pods communicate, 
 how Ingress routes and balances traffic, and how a persistent volume can be attached.
 
-### **What it does**
+<br>
+<br>
+
+### ***What it does***
 
 Python app + HTML page — the main service. Lets you submit a name, list all saved names, and reset the list, backed by Redis (Submit, Show All Names, Reset Data buttons). 
 A PersistentVolume is attached to this deployment.
@@ -18,7 +21,10 @@ Host	Routes to: <br>
 names-app	- Python app (UI + Redis-backed logic) <br>
 nginx	- NGINX static page <br>
 
-### **Stack** <br>
+<br>
+<br>
+
+### ***Stack*** <br>
 Kubernetes (tested on minikube) <br>
 Python (app logic + HTML UI) <br>
 Redis (data store) <br>
@@ -26,26 +32,29 @@ NGINX (static demo page) <br>
 Ingress (nginx controller) — host-based routing <br>
 PersistentVolumeClaim — persistent storage for the Python app <br>
 
-### **Running locally (minikube)** <br>
+<br>
+<br>
+
+### ***Running locally (minikube)*** <br>
 bash <br>
-**Start the cluster** <br>
+***Start the cluster*** <br>
 `minikube start` <br>
 
-**Enable the Ingress addon** <br>
+***Enable the Ingress addon*** <br>
 `minikube addons enable ingress`
 
-**Apply all manifests** <br>
+***Apply all manifests*** <br>
 `kubectl apply -f k8s/`
 
-**Check everything is up** <br>
+***Check everything is up*** <br>
 `kubectl get pods` <br>
 `kubectl get svc` <br>
 `kubectl get ingress` <br>
 
-**Expose the Ingress controller** <br>
+***Expose the Ingress controller*** <br>
 `minikube tunnel`
 
-**Add both hosts to your hosts file (/etc/hosts on Linux/Mac, C:\Windows\System32\drivers\etc\hosts on Windows):**
+***Add both hosts to your hosts file (/etc/hosts on Linux/Mac, C:\Windows\System32\drivers\etc\hosts on Windows):***
 
 `127.0.0.1   names-app` <br>
 `127.0.0.1   nginx` <br>
@@ -56,6 +65,6 @@ http://names-app — the app (submit / show / reset names) <br>
 http://nginx — the NGINX demo page 
  
 
-### **Next steps** <br>
+### ***Next steps*** <br>
 Terraform configuration to deploy this to AWS (EKS) — see aws/ branch or folder <br>
 CI/CD pipeline for automated deployment
