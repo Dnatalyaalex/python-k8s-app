@@ -10,6 +10,9 @@ Python app + HTML page — the main service. Lets you submit a name, list all sa
 A PersistentVolume is attached to this deployment.
 
 Redis — separate pod/service used purely as the data store for the Python app.
+Redis is configured with a custom `redis.conf`:
+- `bind 0.0.0.0` — required so Redis accepts connections from other pods over the cluster network (by default it only listens on localhost, a protected-mode safeguard)
+- `requirepass` — a password is required once binding beyond localhost, otherwise Redis is reachable by anyone who can reach the pod
 
 NGINX — a standalone pod/service serving a static "Hello from NGINX service!" page, used to demonstrate host-based routing alongside the main app.
 
