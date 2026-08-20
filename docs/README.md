@@ -2,10 +2,8 @@
 
 A small multi-service app built purely as a learning exercise — the goal isn't the app's functionality, but demonstrating how containers in separate pods communicate, 
 how Ingress routes and balances traffic, and how a persistent volume can be attached.
-
 <br>
 <br>
-
 ### ***What it does***
 
 Python app + HTML page — the main service. Lets you submit a name, list all saved names, and reset the list, backed by Redis (Submit, Show All Names, Reset Data buttons). 
@@ -20,10 +18,8 @@ Each part (Python+HTML, Redis, NGINX) has its own Deployment and Service. An Ing
 Host	Routes to: <br>
 names-app	- Python app (UI + Redis-backed logic) <br>
 nginx	- NGINX static page <br>
-
 <br>
 <br>
-
 ### ***Stack*** <br>
 Kubernetes (tested on minikube) <br>
 Python (app logic + HTML UI) <br>
@@ -31,10 +27,8 @@ Redis (data store) <br>
 NGINX (static demo page) <br>
 Ingress (nginx controller) — host-based routing <br>
 PersistentVolumeClaim — persistent storage for the Python app <br>
-
 <br>
 <br>
-
 ### ***Running locally (minikube)*** <br>
 bash <br>
 ***Start the cluster*** <br>
