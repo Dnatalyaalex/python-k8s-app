@@ -39,7 +39,7 @@ metadata:
   name: nginx-service 
 spec:
   selector: 
-    service: nginx 
+    service: nginx
   ports:
     - port: 80
       targetPort: 80
