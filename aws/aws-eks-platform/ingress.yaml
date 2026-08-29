@@ -1,0 +1,37 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress 
+metadata:
+  name: names-app-ingress
+spec:
+  ingressClassName: alb 
+  rules:
+    - host: names-app
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: names-app 
+              port: 
+                number: 80
+    - host: names-app/nginx 
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: nginx-service
+              port:
+                number: 80 
+
+
+
+
+
+
+
+
+
+

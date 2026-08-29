@@ -1,0 +1,29 @@
+apiVersion: apps/v1 
+kind: Deployment 
+metadata: 
+  name: backend 
+  labels: 
+    service: backend 
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      service: backend 
+  template:
+    metadata:
+      labels: 
+        service: backend 
+    spec:
+      containers: 
+      - name: backend 
+        ports:
+        - containerPort: 5001
+        image: ghcr.io/dnatalyaalex/python-k8s-app-backend:1.0
+#        volumeMounts:
+#            - name: data
+#              mountPath: /app/data
+#      volumes:
+#        - name: data 
+#          persistentVolumeClaim:
+#            claimName: names-app-volume-pvc
+
