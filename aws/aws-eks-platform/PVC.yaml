@@ -19,4 +19,5 @@ provisioner: ebs.csi.aws.com
 reclaimPolicy: Delete
 volumeBindingMode: WaitForFirstConsumer
 parameters:
+  csi.storage.k8s.io/fstype: xfs
   type: gp3
