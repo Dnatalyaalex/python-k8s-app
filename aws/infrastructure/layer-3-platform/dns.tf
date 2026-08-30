@@ -17,7 +17,6 @@ resource "aws_eks_pod_identity_association" "eks_e_dns" {
 
 # External DNS deployment
 
-# 6. Сам external-dns — идентично IRSA-варианту
 resource "helm_release" "external_dns" {
     name       = "external-dns"
     repository = "https://kubernetes-sigs.github.io/external-dns/"
