@@ -75,3 +75,58 @@ resource "aws_iam_role_policy_attachment" "cni_policy_attachment" {
   role       = aws_iam_role.cni_pod_identity_role.name
 }
 
+
+# AWS ExternalDNS 
+
+resource "aws_iam_policy" "eks_e_dns" {
+    name = "eks_e_dns_policy"
+    policy = jsonencode({
+        Version = "2012-10-17"
+        Statement = [
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "route53:ChangeResourceRecordSets",
+                    "route53:ListResourceRecordSets",
+                    "route53:ListTagsForResources"
+                ],
+                "Resource": [
+                    "arn:aws:route53:::hostedzone/*"
+                ]
+            },
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "route53:ListHostedZones"
+                ],
+                "Resource": [
+                    "*"
+                ]
+            }
+        ]
+    })
+}
+
+resource "aws_iam_role" "eks_e_dns" {
+    name = "eks-dns-role"
+    assume_role_policy = jsonencode({
+        Version = "2012-10-17"
+        Statement = [{
+            Effect = "Allow"
+            Action = [
+                "sts:AssumeRole",
+                "sts:TagSession"
+            ]
+            Principal = {
+                Service = "pods.eks.amazonaws.com"
+            }
+        }]
+    })
+}
+
+
+resource "aws_iam_role_policy_attachment" "eks_e_dns" {
+    policy_arn = aws_iam_policy.eks_e_dns.arn
+    role       = aws_iam_role.eks_e_dns.name
+
+}

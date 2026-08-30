@@ -17,3 +17,7 @@ output "names_app_cluster_id" {
 output "names_app_cluster_name" {
     value = aws_eks_cluster.names_app.name 
 }
+
+output "e_dns_role_arn" {
+    value = aws_iam_role.eks_e_dns.arn
+}
