@@ -5,6 +5,18 @@ metadata:
 spec:
   accessModes: 
     - ReadWriteMany
+  storageClassName: names-app-storage
   resources:
     requests:
-      storage: 1Gi
+      storage: 2Gi
+---
+
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: names-app-storage
+provisioner: ebs.csi.aws.com
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+parameters:
+  type: gp3
