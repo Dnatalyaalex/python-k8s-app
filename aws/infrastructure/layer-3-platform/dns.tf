@@ -1,5 +1,5 @@
 # DNS Service Account
-resource "kubernetes_service_account" "external_dns" {
+resource "kubernetes_service_account_v1" "external_dns" {
     metadata {
         name = "external-dns"
         namespace = "kube-system"
@@ -13,6 +13,8 @@ resource "aws_eks_pod_identity_association" "eks_e_dns" {
   namespace = "kube-system"
   service_account = kubernetes_service_account_v1.external_dns.metadata[0].name
   role_arn = data.terraform_remote_state.eks.outputs.e_dns_role_arn
+
+  depends_on = [ kubernetes_service_account_v1.external_dns ]
 }
 
 # External DNS deployment
@@ -31,7 +33,7 @@ resource "helm_release" "external_dns" {
 
         {
             name  = "serviceAccount.name"
-            value = kubernetes_service_account.external_dns.metadata[0].name
+            value = kubernetes_service_account_v1.external_dns.metadata[0].name
         },
 
         {
@@ -44,4 +46,6 @@ resource "helm_release" "external_dns" {
             value = "names-app"
         }
     ]
+
+    depends_on = [aws_eks_pod_identity_association.eks_e_dns]
 }

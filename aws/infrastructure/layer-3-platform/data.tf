@@ -16,3 +16,12 @@ data "terraform_remote_state" "network" {
         region = "eu-central-1"
     }
 }
+
+data "terraform_remote_state" "dns" {
+    backend = "s3"
+    config = {
+        bucket = "my-tf-state-nad"
+        key = "names-app-eks/route53.tfstate"
+        region = "eu-central-1"
+    }
+}
