@@ -2,29 +2,45 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress 
 metadata:
   name: names-app-ingress
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: names-app.click
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-central-1:587718556989:certificate/a0550800-cfb8-489f-a026-b30ffe660000
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
 spec:
   ingressClassName: alb 
   rules:
-    - host: names-app
+    - host: names-app.click
       http:
         paths:
         - path: /
-          pathType: Prefix
+          pathType: Exact
           backend:
             service:
               name: names-app 
               port: 
                 number: 80
-    - host: names-app/nginx 
+    - host: names-app.click 
       http:
         paths:
-        - path: /
+        - path: /nginx
           pathType: Prefix
           backend:
             service:
               name: nginx-service
               port:
-                number: 80 
+                number: 80
+    - host: names-app.click 
+      http:
+        paths:
+        - path: /api 
+          pathType: Prefix
+          backend:
+            service:
+              name: names-app
+              port:
+                number: 80
+
 
 
 
