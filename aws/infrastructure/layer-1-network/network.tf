@@ -1,3 +1,11 @@
+## VAR
+
+locals {
+    cluster_name = "names-app"
+}
+
+
+
 # VPC
 resource "aws_vpc" "eks_vpc" {
     cidr_block = "10.0.0.0/16"
@@ -51,6 +59,9 @@ resource "aws_subnet" "eks_subnet1" {
 
     tags = {
         Name = "eks-subnet1"
+        "kubernetes.io/cluster/${local.cluster_name}" = "shared"
+        "kubernetes.io/role/elb"                    = "1"
+
     }
 }
 
@@ -62,6 +73,8 @@ resource "aws_subnet" "eks_subnet2" {
 
     tags = {
         Name = "eks-subnet2"
+        "kubernetes.io/cluster/${local.cluster_name}" = "shared"
+        "kubernetes.io/role/elb"                    = "1"
     }
 }
 
@@ -78,5 +91,3 @@ resource "aws_internet_gateway_attachment" "eks_gateway_attachment" {
     vpc_id = aws_vpc.eks_vpc.id 
 }
 
-
-## SG
