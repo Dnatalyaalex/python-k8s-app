@@ -78,7 +78,7 @@ resource "aws_subnet" "eks_subnet2" {
     }
 }
 
-#API Gateway
+# Internet Gateway
 
 resource "aws_internet_gateway" "eks_gateway" {
     tags = {
