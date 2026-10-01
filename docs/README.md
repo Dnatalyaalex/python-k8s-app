@@ -39,7 +39,7 @@ bash <br>
 `minikube addons enable ingress`
 
 **Apply all manifests** <br>
-`kubectl apply -f k8s/`
+`kubectl apply -f minikube/`
 
 **Check everything is up** <br>
 `kubectl get pods` <br>
