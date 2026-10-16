@@ -12,5 +12,5 @@ jobs:
       - name: Checkout 
         uses: actions/checkout@v4
 
-      - uses: koozz/yamllint-action@latest
+      - uses: koozz/yamllint-action@1.0.0
         name: lint-yaml
