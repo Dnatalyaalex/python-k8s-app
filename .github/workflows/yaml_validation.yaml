@@ -12,7 +12,10 @@ jobs:
       - name: Checkout 
         uses: actions/checkout@v4
 
-      - uses: ibireme/yamllint-action@v1
-        name: lint-yaml
-        with:
-          file_or_dir: '.'
+      - name: install linter
+        run: |
+          sudo apt update
+          sudo apt install -y yamllint 
+      - name: run linter
+        run: |
+          yamllint .
