@@ -1,0 +1,18 @@
+name: YAML Validation 
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - '*.yaml'
+jobs:
+  lint-yaml:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: bieggerm/yamale-action@v2
+        name: lint-yaml 
+        with:
+          base_dir: "../../aws/aws-eks-platform"
+          schema: ".lint/schema.yaml"
+          include_subdir: true
+          filename: "*.yaml"
