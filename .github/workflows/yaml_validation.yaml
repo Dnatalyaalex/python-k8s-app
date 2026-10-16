@@ -14,5 +14,4 @@ jobs:
 
       - uses: khiemdoan/yaml-linting-action@v1
         name: lint-yaml
-        with:
-          files: '*.yaml'
+        run: yamllint .
