@@ -26,4 +26,5 @@ spec:
 #        - name: data 
 #          persistentVolumeClaim:
 #            claimName: names-app-volume-pvc
-
+#
+#
