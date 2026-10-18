@@ -8,7 +8,7 @@ on:
       environment:
         description: "Environment"
         required: true
-        default: "${{ vars.PROD_ENV }}"
+        default: "production"
 
 permissions:
   contents: read
@@ -40,3 +40,5 @@ jobs:
           push: true
           tags: ghcr.io/dnatalyaalex/python-k8s-app-nginx:${{ steps.version.outputs.version }}
           context: ./aws/nginx
+      - name: echo
+        run: echo "${{ vars.PROD_ENV }}"
