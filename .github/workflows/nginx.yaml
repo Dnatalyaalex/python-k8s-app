@@ -5,9 +5,10 @@ on:
   #     - 'nginx-v*'
   workflow_dispatch:
     inputs:
-      description: "Environment"
-      required: true
-      default: No
+      environment:
+        description: "Environment"
+        required: true
+        default: No
 
 permissions:
   contents: read
