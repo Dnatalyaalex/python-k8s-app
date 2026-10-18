@@ -1,8 +1,13 @@
 name: Nginx Image build 
 on:
-  push:
-    tags:
-      - 'nginx-v*'
+  # push:
+  #   tags:
+  #     - 'nginx-v*'
+  workflow_dispatch:
+    inputs:
+      description: "Environment"
+      required: true
+      default: No
 
 permissions:
   contents: read
