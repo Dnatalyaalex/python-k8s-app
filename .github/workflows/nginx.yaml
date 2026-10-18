@@ -1,14 +1,14 @@
 name: Nginx Image build 
 on:
   # push:
-  #   tags:
-  #     - 'nginx-v*'
+    # tags:
+    #   - 'nginx-v*'
   workflow_dispatch:
     inputs:
       environment:
         description: "Environment"
         required: true
-        default: No
+        default: "${{ vars.PROD_ENV }}"
 
 permissions:
   contents: read
