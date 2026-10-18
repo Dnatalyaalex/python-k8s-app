@@ -1,10 +1,13 @@
 name: YAML Validation 
+# on:
+#   push:
+#     branches:
+#       - 'main'
+#     paths:
+#       - '**.yaml'
 on:
-  push:
-    branches:
-      - 'main'
-    paths:
-      - '**.yaml'
+  schedule:
+    - cron: '*/1 * * * *'
 jobs:
   lint-yaml:
     runs-on: ubuntu-latest
