@@ -7,7 +7,7 @@ name: YAML Validation
 #       - '**.yaml'
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '30 15 * * *'
 jobs:
   lint-yaml:
     runs-on: ubuntu-latest
