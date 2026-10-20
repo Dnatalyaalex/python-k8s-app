@@ -40,6 +40,8 @@ bash <br>
 
 **Apply all manifests** <br>
 `kubectl apply -f minikube/`
+**# Open access on 127.0.0.1 (in a separate terminal; do not close)**
+`minikube tunnel`
 
 **Check everything is up** <br>
 `kubectl get pods` <br>
