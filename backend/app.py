@@ -1,8 +1,10 @@
 import json
 import redis
 from flask import Flask, request, jsonify, render_template
+from prometheus_flask_exporter import PrometheusMetrics
 
 app = Flask(__name__)
+metrics = PrometheusMetrics(app)
 
 redis_client = redis.Redis(
     host="redis",
