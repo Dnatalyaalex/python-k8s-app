@@ -52,6 +52,18 @@ def api_reset():
     reset_names()
     return jsonify({"ok": True})
 
+# Demo endpoints to provide content for dashboards and alerts.
+@app.route("/slow")
+def slow():
+    time.sleep(random.uniform(0.2, 1.5))
+    return "slowly"
+
+@app.route("/flaky")
+def flaky():
+    if random.random() < 0.3:
+        app.logger.error("A random error in /flaky")
+        return "error", 500
+    return "ok"
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001)

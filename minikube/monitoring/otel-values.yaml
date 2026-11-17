@@ -1,0 +1,17 @@
+config:
+  exporters:
+    otlp/apm:                       # трейсы → APM Server → Elasticsearch
+      endpoint: apm-server:8200
+      tls:
+        insecure: true
+    elasticsearch/logs:             # логи → Elasticsearch напрямую
+      endpoints: [http://elasticsearch:9200]
+      logs_index: names-app-logs
+      mapping:
+        mode: ecs
+  service:
+    pipelines:
+      traces:
+        exporters: [debug, otlp/apm]
+      logs:
+        exporters: [debug, elasticsearch/logs]

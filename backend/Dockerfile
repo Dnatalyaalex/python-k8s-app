@@ -6,6 +6,7 @@ COPY . .
 RUN groupadd -r appgroup && \
     useradd -r -g appgroup -s /sbin/nologin appuser
 RUN pip install --no-cache-dir -r requirements.txt
+RUN opentelemetry-bootstrap -a install
 RUN chown -R appuser:appgroup /usr/src/app
 USER appuser
-CMD [ "python", "./app.py" ]
+CMD [ "opentelemetry-instrument", "python", "./app.py" ]

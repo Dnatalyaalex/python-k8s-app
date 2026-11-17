@@ -14,11 +14,25 @@ spec:
       labels: 
         service: backend 
     spec:
-      containers: 
-      - name: backend 
+      containers:
+      - name: backend
+        env:
+          - name: OTEL_SERVICE_NAME
+            value: names-app
+          - name: OTEL_EXPORTER_OTLP_ENDPOINT
+            value: http://otel-collector.monitoring.svc.cluster.local:4317
+          - name: OTEL_TRACES_EXPORTER
+            value: otlp
+          - name: OTEL_LOGS_EXPORTER
+            value: otlp
+          - name: OTEL_METRICS_EXPORTER
+            value: none
+          - name: OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED
+            value: "true"
         ports:
         - containerPort: 5001
-        image: ghcr.io/dnatalyaalex/python-k8s-app-backend:1.0
+        image: ghcr.io/dnatalyaalex/python-k8s-app-backend:1.1
+        imagePullPolicy: "Always"
         volumeMounts:
             - name: data
               mountPath: /app/data
