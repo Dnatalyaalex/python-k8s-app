@@ -31,7 +31,7 @@ spec:
             value: "true"
         ports:
         - containerPort: 5001
-        image: ghcr.io/dnatalyaalex/python-k8s-app-backend:1.1
+        image: ghcr.io/dnatalyaalex/python-k8s-app-backend:1.2
         imagePullPolicy: "Always"
         volumeMounts:
             - name: data
